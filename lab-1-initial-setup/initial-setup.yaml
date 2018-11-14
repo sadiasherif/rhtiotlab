@@ -1,0 +1,59 @@
+{
+    "kind": "List",
+    "apiVersion": "v1",
+    "metadata": {},
+    "items": [
+        {
+            "apiVersion": "v1",
+            "data": {
+                "esf.hostname": "http://ec-api-iot-demo-infosys-3e7e-user4.apps.infosys-3e7e.openshiftworkshop.com",
+                "esf.password": "Infosys123!@#",
+                "esf.port": "80",
+                "esf.username": "user4",
+                "mariadb.database": "ecdb",
+                "mariadb.password": "RedHat123",
+                "mariadb.port": "3306",
+                "mariadb.service": "mariadb",
+                "mariadb.username": "redhat",
+                "mqtt.hostname": "ec-broker-mqtt.iot-demo-infosys-3e7e-user4.svc",
+                "mqtt.machine.topic": "+/+/cloudera-demo/facilities/+/lines/+/machines/machine-1",
+                "mqtt.password": "ec-password",
+                "mqtt.payload.topic": "iot-demo/data",
+                "mqtt.port": "1833",
+                "mqtt.user.password": "Infosys123!@#",
+                "mqtt.user.username": "user4",
+                "mqtt.username": "ec-sys",
+                "mqtt.websocket": "ec-broker-ws-iot-demo-infosys-3e7e-user4.apps.infosys-3e7e.openshiftworkshop.com",
+                "mqtt.websocket.port": "80"
+            },
+            "kind": "ConfigMap",
+            "metadata": {
+                "name": "iotdemo-config-map"
+            }
+        },
+        {
+            "apiVersion": "image.openshift.io/v1",
+            "kind": "ImageStream",
+            "labels": {
+                "app": "s2i-java"
+            },
+            "metadata": {
+                "name": "s2i-java"
+            },
+            "spec": {
+                "tags": [
+                    {
+                        "from": {
+                            "kind": "DockerImage",
+                            "name": "fabric8/s2i-java:2.3.1"
+                        },
+                        "name": "2.3.1",
+                        "referencePolicy": {
+                            "type": "Source"
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}
