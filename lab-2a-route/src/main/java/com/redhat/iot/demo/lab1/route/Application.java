@@ -29,8 +29,12 @@ public class Application extends RouteBuilder {
 
         from("file:/tmp/lab2a/")
                 .split(body().tokenize("\n")).streaming()
-
-
-                .to("http://lab-2a-web:8080/iot");
+                .unmarshal(csv)
+                .delay(1000)
+                .process(new CsvProcess())
+                .marshal().json(JsonLibrary.Jackson)
+                .setHeader(Exchange.HTTP_METHOD,constant("POST"))
+                .setHeader(Exchange.CONTENT_TYPE,constant("application/json"))
+               .to("http://lab-2a-web:8080/iot");
     }
 }
